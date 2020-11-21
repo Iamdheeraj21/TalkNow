@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Clear Chat"
+        android:id="@+id/clear_chat"
+        tools:ignore="HardcodedText" />
+    <item android:title="See profile"
+        android:id="@+id/see_profile"
+        tools:ignore="HardcodedText" />
+</menu>

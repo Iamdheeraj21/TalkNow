@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "276271606464",
+    "firebase_url": "https://project-86785.firebaseio.com",
+    "project_id": "project-86785",
+    "storage_bucket": "project-86785.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276271606464:android:af2ac716330795ee711b25",
+        "android_client_info": {
+          "package_name": "www.dheerajprajapati.blogspot.start_activity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276271606464-7do4f0f1mrdt1t214nen7paoho569uhd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvU9zfr7UEHbD7EcA05CjWGG7tVgM-aMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276271606464-7do4f0f1mrdt1t214nen7paoho569uhd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
