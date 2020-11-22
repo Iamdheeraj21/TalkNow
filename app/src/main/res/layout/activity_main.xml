@@ -28,6 +28,17 @@
                 android:id="@+id/uname2"
                 android:layout_marginStart="25dp"
                 android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uname2"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/about"
+                android:text="hii"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="10dp"
+                tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.Toolbar>
         <com.google.android.material.tabs.TabLayout

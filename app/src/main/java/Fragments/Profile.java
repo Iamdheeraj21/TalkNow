@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
 public class Profile extends Fragment
 {
     private CircleImageView circleImageView;
-    TextView textView;
+    TextView textView,about;
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
@@ -67,6 +67,7 @@ public class Profile extends Fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         circleImageView = view.findViewById(R.id.profile);
         textView = view.findViewById(R.id.profile_username);
+        about=view.findViewById(R.id.about);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -82,6 +83,7 @@ public class Profile extends Fragment
                 User user = snapshot.getValue(User.class);
                 assert user != null;
                 textView.setText(user.getUsername());
+                about.setText(user.getAbout());
                 if (user.getImageurl().equals("default")) {
                     circleImageView.setImageResource(R.mipmap.ic_launcher);
                 } else {

@@ -78,6 +78,7 @@ public class Register extends AppCompatActivity
                     hashMap.put("username",username);
                     hashMap.put("imageurl","default");
                     hashMap.put("status","Offline");
+                    hashMap.put("about","Available");
                     hashMap.put("search",username.toUpperCase());
 
                     databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

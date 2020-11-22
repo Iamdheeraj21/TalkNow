@@ -48,7 +48,7 @@ import retrofit2.Response;
 public class Message extends AppCompatActivity
 {
     CircleImageView profile;
-    TextView uname;
+    TextView uname,about;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     ImageButton btn_send;
@@ -70,6 +70,7 @@ public class Message extends AppCompatActivity
         btn_send=findViewById(R.id.btn_send);
         txt_send=findViewById(R.id.txt_send);
         recyclerView=findViewById(R.id.recycler_view2);
+        about=findViewById(R.id.about);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -116,6 +117,7 @@ public class Message extends AppCompatActivity
                 User user=snapshot.getValue(User.class);
                 assert user != null;
                 uname.setText(user.getUsername());
+                about.setText(user.getAbout());
                 if(user.getImageurl().equals("default"))
                 {
                     profile.setImageResource(R.mipmap.ic_launcher_round);
