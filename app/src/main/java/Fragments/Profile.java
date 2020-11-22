@@ -6,11 +6,15 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +22,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
@@ -50,10 +53,12 @@ public class Profile extends Fragment
 {
     private CircleImageView circleImageView;
     TextView textView,about;
+    EditText aboutchange;
+    Button about_button;
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
-
+    ValueEventListener aboutUpdate;
     StorageReference storageReference;
     private static final int IMAGE_REQUEST=1;
     private Uri imageurl;
@@ -68,6 +73,8 @@ public class Profile extends Fragment
         circleImageView = view.findViewById(R.id.profile);
         textView = view.findViewById(R.id.profile_username);
         about=view.findViewById(R.id.about);
+        aboutchange=view.findViewById(R.id.changeabout);
+        about_button=view.findViewById(R.id.about_btn);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -96,6 +103,31 @@ public class Profile extends Fragment
 
             }
         });
+        about_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String aboutstatus=aboutchange.getText().toString();
+                if(aboutstatus.equals(""))
+                {
+                    Toast.makeText(getContext(),"Please type your status!",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                databaseReference.child("about").setValue(aboutstatus).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(),"Status update successfully",Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+                }
+                aboutchange.setVisibility(View.GONE);
+                about_button.setVisibility(View.GONE);
+            }
+        });
 
         /* Change the profile image*/
         circleImageView.setOnClickListener(new View.OnClickListener()
@@ -120,6 +152,7 @@ public class Profile extends Fragment
                 popupMenu.show();
             }
         });
+        registerForContextMenu(about);
         return view;
     }
 
@@ -197,5 +230,37 @@ public class Profile extends Fragment
                 uploadImage();
             }
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0,v.getId(),0,"Clear About");
+        menu.add(0,v.getId(),0,"Change About");
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if(item.getTitle()=="Clear About")
+        {
+            databaseReference.child("about").setValue("Available").addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(getContext(),"Default Status update successfully",Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+            return true;
+        }
+        else  if (item.getTitle()=="Change About"){
+            aboutchange.setVisibility(View.VISIBLE);
+            about_button.setVisibility(View.VISIBLE);
+            return true;
+        }
+        return true;
     }
 }

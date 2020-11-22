@@ -9,7 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tool">
+        android:id="@+id/tool"
+        android:background="@color/colorPrimary">
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,24 +24,21 @@
                 android:id="@+id/profile_pic3"
                 tools:ignore="ContentDescription" />
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:id="@+id/uname4"
                 android:layout_marginStart="25dp"
                 android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/uname4"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:id="@+id/about"
-                android:text="hii"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="10dp"
-                tools:ignore="HardcodedText" />
-
         </androidx.appcompat.widget.Toolbar>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tool"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/about"
+            tools:ignore="HardcodedText"
+            android:layout_marginLeft="100dp"/>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
