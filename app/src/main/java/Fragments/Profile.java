@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +57,6 @@ public class Profile extends Fragment
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
-    ValueEventListener aboutUpdate;
     StorageReference storageReference;
     private static final int IMAGE_REQUEST=1;
     private Uri imageurl;
