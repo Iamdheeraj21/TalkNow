@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -93,7 +94,8 @@ public class Profile extends Fragment
 
             }
         });
-///////////////////////////////////////////////////////////
+
+        /* Change the profile image*/
         circleImageView.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -106,41 +108,7 @@ public class Profile extends Fragment
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int itemId = item.getItemId();
-                        if (itemId == R.id.removeimage)
-                        {
-                            FirebaseStorage storage=FirebaseStorage.getInstance();
-                            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-                            databaseReference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    for (DataSnapshot dataSnapshot:snapshot.getChildren())
-                                    {
-                                        User user=dataSnapshot.getValue(User.class);
-                                        StorageReference storageReference = storage.getReference("Uploads");
-                                        StorageReference storageReference1 = storageReference.child(firebaseUser.getUid());
-                                        StorageReference storageReference2=storageReference1.child(user.getImageurl());
-                                        storageReference2.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Toast.makeText(getContext(), "Profile image removed", Toast.LENGTH_SHORT).show();
-
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(getContext(), "Uh-oh , an error occurred", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                        }
-                        else if (itemId == R.id.changeimage) {
+                        if (itemId == R.id.changeimage) {
                             openImage();
                             return true;
                         }
@@ -212,6 +180,7 @@ public class Profile extends Fragment
         }else {
             Toast.makeText(getContext(),"no image selected",Toast.LENGTH_SHORT).show();
         }
+        progressDialog.show();
     }
 
     @Override
