@@ -88,4 +88,16 @@
         android:layout_marginLeft="150dp"
         tools:ignore="HardcodedText,RtlHardcoded"
         android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_btn"
+        android:id="@+id/MobileNumber"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="PhoneNumber"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        tools:ignore="HardcodedText,RtlHardcoded"/>
 </RelativeLayout>

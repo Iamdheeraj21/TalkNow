@@ -72,7 +72,6 @@ public class Register extends AppCompatActivity
                     FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
                     String UserId=firebaseUser.getUid();
                     databaseReference= FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-
                     HashMap<String,String> hashMap=new HashMap<>();
                     hashMap.put("id",UserId);
                     hashMap.put("username",username);

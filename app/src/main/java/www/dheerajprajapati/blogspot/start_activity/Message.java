@@ -300,22 +300,4 @@ public class Message extends AppCompatActivity
         status("Offline");
         currentUser("none");
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.clear_chat){
-            Toast.makeText(Message.this,"Clear Chat....",Toast.LENGTH_SHORT).show();
-            return true;
-        }else if(item.getItemId()==R.id.see_profile){
-            Toast.makeText(Message.this,"See profile",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
-    }
 }

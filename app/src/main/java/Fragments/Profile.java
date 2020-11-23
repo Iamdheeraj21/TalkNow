@@ -1,11 +1,14 @@
 package Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,13 +18,12 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,9 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-
 import java.util.HashMap;
-
 import Project.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 import www.dheerajprajapati.blogspot.start_activity.R;
@@ -51,7 +51,7 @@ import static android.app.Activity.RESULT_OK;
 public class Profile extends Fragment
 {
     private CircleImageView circleImageView;
-    TextView textView,about;
+    TextView username,about;
     EditText aboutchange;
     Button about_button;
 
@@ -69,11 +69,10 @@ public class Profile extends Fragment
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         circleImageView = view.findViewById(R.id.profile);
-        textView = view.findViewById(R.id.profile_username);
+        username = view.findViewById(R.id.profile_username);
         about=view.findViewById(R.id.about);
         aboutchange=view.findViewById(R.id.changeabout);
         about_button=view.findViewById(R.id.about_btn);
-
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -87,7 +86,7 @@ public class Profile extends Fragment
                 }
                 User user = snapshot.getValue(User.class);
                 assert user != null;
-                textView.setText(user.getUsername());
+                username.setText(user.getUsername());
                 about.setText(user.getAbout());
                 if (user.getImageurl().equals("default")) {
                     circleImageView.setImageResource(R.mipmap.ic_launcher);
@@ -125,6 +124,39 @@ public class Profile extends Fragment
                 aboutchange.setVisibility(View.GONE);
                 about_button.setVisibility(View.GONE);
             }
+        });
+        /*Change the username*/
+        username.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+            AlertDialog.Builder builder=new AlertDialog.Builder(getContext()).setTitle("Enter new username");
+            final EditText input=new EditText(getContext());
+            RelativeLayout.LayoutParams relativeLayout=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(relativeLayout);
+            builder.setView(input);
+            builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String user_name=input.getText().toString();
+                    if(TextUtils.isEmpty(user_name)){
+                        Toast.makeText(getContext(),"Please enter new username!",Toast.LENGTH_SHORT).show();
+                    }else{
+                        databaseReference.child("username").setValue(user_name).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getContext(),"Username update successfully...",Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+            }).setNegativeButton("Cancel",null).show();
+          }
         });
 
         /* Change the profile image*/
