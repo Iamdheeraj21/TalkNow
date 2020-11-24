@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu,menu);
         return true;
     }
 
@@ -126,11 +126,8 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), Start.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
-        }else if(item.getItemId()==R.id.Setting){
-            startActivity(new Intent(getApplicationContext(), Settings.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            return true;
-        }else if(item.getItemId()==R.id.aboutUs){
-            startActivity(new Intent(getApplicationContext(), AboutUs.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }else if(item.getItemId()==R.id.Profile){
+            startActivity(new Intent(getApplicationContext(),User_Profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
         }
         return false;

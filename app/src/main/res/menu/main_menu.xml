@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Setting"
-        android:id="@+id/Setting"
-        tools:ignore="HardcodedText"/>
-    <item android:title="AboutUs"
-        android:id="@+id/aboutUs"
+    <item android:title="Profile"
+        android:id="@+id/Profile"
         tools:ignore="HardcodedText" />
     <item android:title="Logout"
         android:id="@+id/logout"
