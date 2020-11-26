@@ -17,8 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Start_Activity"
         tools:ignore="AllowBackup">
-        <activity android:name=".show_profile"
-            android:parentActivityName=".User_Profile"/>
+        <activity android:name=".create_group"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".show_profile"
+            android:parentActivityName=".User_Profile" />
         <activity
             android:name=".User_Profile"
             android:parentActivityName=".MainActivity" />

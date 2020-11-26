@@ -2,18 +2,27 @@ package www.dheerajprajapati.blogspot.start_activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import Fragments.Chats;
-import Fragments.Profile;
+import Fragments.Groups;
 import Fragments.Users;
 import Project.Chat;
 import Project.User;
@@ -99,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 viewPagerAdapter.addFragment(new Users(),"Users");
-                viewPagerAdapter.addFragment(new Profile(),"Groups");
+                viewPagerAdapter.addFragment(new Groups(),"Groups");
                 viewPager.setAdapter(viewPagerAdapter);
                 tabLayout.setupWithViewPager(viewPager);
             }
@@ -126,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
         }else if(item.getItemId()==R.id.Profile){
             startActivity(new Intent(getApplicationContext(),User_Profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
+        }else if (item.getItemId() == R.id.create_group){
+               startActivity(new Intent(MainActivity.this,create_group.class));
+               return true;
         }
         return false;
     }

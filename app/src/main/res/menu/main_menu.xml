@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Create Group"
+        android:id="@+id/create_group"
+        tools:ignore="HardcodedText" />
     <item android:title="Profile"
         android:id="@+id/Profile"
         tools:ignore="HardcodedText" />

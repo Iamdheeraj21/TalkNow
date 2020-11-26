@@ -2,6 +2,7 @@ package Fragments;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,8 @@ public class Users extends Fragment
                     if(!user.getId().equals(firebaseUser.getUid()))
                     {
                         mUsers.add(user);
+                    }else if(TextUtils.isEmpty(toString)){
+                        mUsers.clear();
                     }
                 }
                 userAdapter=new UserAdapter(getContext(),mUsers,false);
