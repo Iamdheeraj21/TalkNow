@@ -1,37 +1,28 @@
 package www.dheerajprajapati.blogspot.start_activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,29 +30,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
-
-import java.util.HashMap;
 
 import Project.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class User_Profile extends AppCompatActivity {
 
-    private CircleImageView circleImageView,img_on,img_off;
+    CircleImageView circleImageView,img_on,img_off;
     TextView username,about;
     EditText aboutchange;
     Button about_button;
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
-    StorageReference storageReference;
-    private static final int IMAGE_REQUEST=1;
-    private Uri imageurl;
-    private StorageTask uploadTask;
+
 
     @Override
     protected void onStart() {
@@ -82,7 +64,7 @@ public class User_Profile extends AppCompatActivity {
         about=findViewById(R.id.about);
         aboutchange=findViewById(R.id.changeabout);
         about_button=findViewById(R.id.about_btn);
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -108,6 +90,13 @@ public class User_Profile extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(User_Profile.this,show_profile.class);
+                startActivity(intent);
             }
         });
         about_button.setOnClickListener(new View.OnClickListener() {
@@ -168,112 +157,8 @@ public class User_Profile extends AppCompatActivity {
                 }).setNegativeButton("Cancel",null).show();
             }
         });
-
-        /* Change the profile image*/
-        circleImageView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                PopupMenu popupMenu=new PopupMenu(User_Profile.this,circleImageView);
-                popupMenu.getMenuInflater().inflate(R.menu.profile_change,popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @SuppressLint("NonConstantResourceId")
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int itemId = item.getItemId();
-                        if (itemId == R.id.changeimage) {
-                            openImage();
-                            return true;
-                        }else if (itemId==R.id.seeimage){
-                            startActivity(new Intent(User_Profile.this,show_profile.class));
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
         registerForContextMenu(about);
     }
-
-    private void openImage()
-    {
-        Intent intent=new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,IMAGE_REQUEST);
-    }
-    private String getFileExtension(Uri uri){
-        ContentResolver contentResolver= User_Profile.this.getContentResolver();
-        MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-    private void uploadImage(){
-        final ProgressDialog progressDialog=new ProgressDialog(User_Profile.this);
-        progressDialog.setMessage("Uploading...");
-        if(imageurl!=null){
-            final StorageReference file=storageReference.child(System.currentTimeMillis()+"."+getFileExtension(imageurl));
-            uploadTask=file.putFile(imageurl);
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
-                {
-                    if(!task.isSuccessful())
-                    {
-                        throw task.getException();
-                    }
-                    return file.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task)
-                {
-                    if(task.isSuccessful()){
-                        Uri downloaduri=task.getResult();
-                        assert downloaduri != null;
-                        String mUri= downloaduri.toString();
-
-                        databaseReference=FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-                        HashMap<String,Object> map=new HashMap<>();
-                        map.put("imageurl",mUri);
-                        databaseReference.updateChildren(map);
-
-                        progressDialog.dismiss();
-                    }
-                    else
-                    {
-                        Toast.makeText(User_Profile.this,"Failed",Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(User_Profile.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else {
-            Toast.makeText(User_Profile.this,"no image selected",Toast.LENGTH_SHORT).show();
-        }
-        progressDialog.show();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==IMAGE_REQUEST && resultCode==RESULT_OK && data!=null && data.getData() !=null){
-            imageurl=data.getData();
-            if(uploadTask!=null && uploadTask.isInProgress()){
-                Toast.makeText(User_Profile.this,"Upload in Progress",Toast.LENGTH_SHORT).show();
-            }else
-            {
-                uploadImage();
-            }
-        }
-    }
-
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);

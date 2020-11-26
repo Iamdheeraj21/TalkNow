@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,10 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import Fragments.Chats;
 import Fragments.Profile;
 import Fragments.Users;
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 viewPagerAdapter.addFragment(new Users(),"Users");
-                viewPagerAdapter.addFragment(new Profile(),"Profile");
+                viewPagerAdapter.addFragment(new Profile(),"Groups");
                 viewPager.setAdapter(viewPagerAdapter);
                 tabLayout.setupWithViewPager(viewPager);
             }

@@ -3,12 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".show_profile">
-
+    tools:context=".show_profile"
+    android:background="#1E1919">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1919"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            android:id="@+id/toolbar">
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/change_image"
+                android:layout_marginStart="360dp"
+                android:background="@drawable/change_image"
+                tools:ignore="ContentDescription" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
     <ImageView
         android:id="@+id/user_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="200dp"
         tools:layout_editor_absoluteX="137dp"
         tools:layout_editor_absoluteY="245dp"
         tools:srcCompat="@tools:sample/avatars"
