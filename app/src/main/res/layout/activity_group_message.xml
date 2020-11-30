@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Message">
+    tools:context=".Group_Message">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -21,22 +21,22 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/profile_pic3"
+                android:id="@+id/groupimage"
                 tools:ignore="ContentDescription" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:id="@+id/uname4"
+                android:id="@+id/update_groupname"
                 android:layout_marginStart="25dp"
                 android:textColor="@color/black"/>
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="320dp"
-                android:background="@drawable/email"
-                android:id="@+id/send_email"
-                android:contentDescription="Email"
-                tools:ignore="HardcodedText" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="300dp"
+                android:contentDescription="addUser"
+                tools:ignore="HardcodedText"
+                android:id="@+id/add_user"
+                android:background="@drawable/add_user"/>
         </androidx.appcompat.widget.Toolbar>
         <TextView
             android:layout_width="match_parent"
@@ -44,8 +44,8 @@
             android:layout_below="@+id/tool"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:id="@+id/about"
-            tools:ignore="HardcodedText"/>
+            android:id="@+id/update_groupdesc"
+            tools:ignore="HardcodedText" />
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -62,14 +62,14 @@
         android:layout_height="wrap_content">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/txt_send"
             android:layout_toLeftOf="@id/btn_send"
             android:background="@android:color/transparent"
             android:hint="Type a message....."
             android:layout_centerVertical="true"
             tools:ignore="HardcodedText,RtlHardcoded"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:importantForAutofill="no"
             android:inputType="text" />
         <ImageButton
@@ -81,4 +81,5 @@
             android:background="@drawable/send"
             tools:ignore="ContentDescription,HardcodedText" />
     </RelativeLayout>
+
 </RelativeLayout>

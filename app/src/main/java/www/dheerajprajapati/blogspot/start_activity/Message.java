@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ import retrofit2.Response;
 public class Message extends AppCompatActivity
 {
     CircleImageView profile;
+    ImageView email_image;
     TextView uname,about;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
@@ -70,6 +72,7 @@ public class Message extends AppCompatActivity
         btn_send=findViewById(R.id.btn_send);
         txt_send=findViewById(R.id.txt_send);
         recyclerView=findViewById(R.id.recycler_view2);
+        email_image=findViewById(R.id.send_email);
         about=findViewById(R.id.about);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
@@ -95,6 +98,12 @@ public class Message extends AppCompatActivity
         userid=intent.getStringExtra("userid");
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
 
+        email_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo
+            }
+        });
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +142,7 @@ public class Message extends AppCompatActivity
 
             }
         });
+
         setSeenMessage(userid);
     }
     private void setSeenMessage(final String userId){

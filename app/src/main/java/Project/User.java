@@ -8,14 +8,16 @@ public class User
     private String status;
     private String search;
     private String about;
+    private String email;
 
-    public User(String id,String search, String username, String imageurl,String status,String about){
+    public User(String id,String search, String username, String imageurl,String status,String about,String email){
         this.id = id;
         this.username = username;
         this.imageurl = imageurl;
         this.status = status;
         this.search=search;
         this.about=about;
+        this.email=email;
     }
 
     public User(){}
@@ -68,4 +70,11 @@ public class User
         this.about = about;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

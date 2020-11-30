@@ -140,4 +140,23 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         tools:ignore="HardcodedText,RtlHardcoded" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_email"
+        android:layout_below="@+id/Add_number"
+        android:layout_marginTop="10dp"
+        android:text="Email"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        tools:ignore="HardcodedText" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/display_email"
+        android:layout_below="@+id/textview_email"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"/>
 </RelativeLayout>

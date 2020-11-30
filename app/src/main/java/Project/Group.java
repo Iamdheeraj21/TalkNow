@@ -3,16 +3,18 @@ package Project;
 public class Group
 {
     private String groupname;
-    private String groupdescription;
+    private String description;
     private String createdby;
-    private int groupimage;
+    private String groupimage;
+    private String search;
 
 
-    public Group(String groupname, String groupdescription, String createdby, int groupimage) {
+    public Group(String groupname, String description, String createdby, String groupimage,String search) {
         this.groupname = groupname;
-        this.groupdescription = groupdescription;
+        this.description = description;
         this.createdby = createdby;
         this.groupimage = groupimage;
+        this.search=search;
     }
 
     public Group(){
@@ -27,27 +29,19 @@ public class Group
         this.groupname = groupname;
     }
 
-    public String getGroupdescription() {
-        return groupdescription;
-    }
-
-    public void setGroupdescription(String groupdescription) {
-        this.groupdescription = groupdescription;
-    }
-
-    public String getCreatedby() {
-        return createdby;
-    }
-
-    public void setCreatedby(String createdby) {
-        this.createdby = createdby;
-    }
-
-    public int getGroupimage() {
+    public String getGroupimage() {
         return groupimage;
     }
 
-    public void setGroupimage(int groupimage) {
+    public void setGroupimage(String groupimage) {
         this.groupimage = groupimage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

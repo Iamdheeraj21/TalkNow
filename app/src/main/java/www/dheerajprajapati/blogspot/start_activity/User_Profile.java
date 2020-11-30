@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class User_Profile extends AppCompatActivity {
 
     CircleImageView circleImageView,img_on,img_off;
-    TextView username,about;
+    TextView username,about,display_email;
     EditText aboutchange;
     Button about_button;
 
@@ -64,7 +64,7 @@ public class User_Profile extends AppCompatActivity {
         about=findViewById(R.id.about);
         aboutchange=findViewById(R.id.changeabout);
         about_button=findViewById(R.id.about_btn);
-
+        display_email=findViewById(R.id.display_email);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -79,6 +79,7 @@ public class User_Profile extends AppCompatActivity {
                 assert user != null;
                 username.setText(user.getUsername());
                 about.setText(user.getAbout());
+                display_email.setText(user.getEmail());
                 if (user.getImageurl().equals("default")) {
                     circleImageView.setImageResource(R.mipmap.ic_launcher);
                 }

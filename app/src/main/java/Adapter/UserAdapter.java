@@ -1,23 +1,15 @@
 package Adapter;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -126,6 +118,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>
                 for (DataSnapshot dataSnapshot:snapshot.getChildren())
                 {
                     Chat chat=dataSnapshot.getValue(Chat.class);
+                    assert chat != null;
+                    assert firebaseUser != null;
                     if(chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)
                             || chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())){
                         lastmessage=chat.getMessage();

@@ -29,7 +29,6 @@ public class Users extends Fragment
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private List<User> mUsers;
-
     EditText search_user;
 
     @Override
@@ -39,8 +38,8 @@ public class Users extends Fragment
         recyclerView=view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mUsers=new ArrayList<>();
-
         search_user=view.findViewById(R.id.search_user);
+
         search_user.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

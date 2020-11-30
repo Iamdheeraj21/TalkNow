@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.391" />
 
     <EditText
-        android:id="@+id/groupname"
+        android:id="@+id/update_groupname"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/groupimage"
@@ -52,10 +52,10 @@
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/groupdesc"
+        android:id="@+id/update_groupdesc"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/groupname"
+        android:layout_below="@+id/update_groupname"
         android:hint="Description of group"
         android:importantForAutofill="no"
         android:inputType="text"
@@ -68,10 +68,10 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/create_btn"
+        android:id="@+id/Update_btn"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@id/groupdesc"
+        android:layout_below="@id/update_groupdesc"
         android:background="@color/colorPrimary"
         android:text="Create"
         app:iconTint="#FFFFFF"
@@ -87,7 +87,7 @@
         android:id="@+id/cancel_btn"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@id/groupdesc"
+        android:layout_below="@id/update_groupdesc"
         android:background="@color/colorPrimary"
         android:text="Cancel"
         app:iconTint="#FFFFFF"

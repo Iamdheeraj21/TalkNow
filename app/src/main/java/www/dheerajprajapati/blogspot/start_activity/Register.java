@@ -75,6 +75,7 @@ public class Register extends AppCompatActivity
                     HashMap<String,String> hashMap=new HashMap<>();
                     hashMap.put("id",UserId);
                     hashMap.put("username",username);
+                    hashMap.put("email",email);
                     hashMap.put("imageurl","default");
                     hashMap.put("status","Offline");
                     hashMap.put("about","Available");
