@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import Project.Group;
 import Project.User;
@@ -43,9 +45,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Group_Message extends AppCompatActivity
 {
     CircleImageView group_profile;
-    TextView group_name,group_desc;
+    TextView group_name,group_desc,messages;
     ImageButton btn_send;
-    ImageView add_user;
     EditText txt_send;
     Intent intent;
     String groups_name,Current_User;
@@ -76,7 +77,7 @@ public class Group_Message extends AppCompatActivity
         group_desc=findViewById(R.id.update_groupdesc);
         btn_send=findViewById(R.id.btn_send);
         txt_send=findViewById(R.id.txt_send);
-        add_user=findViewById(R.id.add_user);
+        messages=findViewById(R.id.messages);
         intent=getIntent();
         groups_name=intent.getStringExtra("groupname");
         storageReference = FirebaseStorage.getInstance().getReference("groupimage");
@@ -108,6 +109,7 @@ public class Group_Message extends AppCompatActivity
                     openImage();
             }
         });
+        GroupRef= FirebaseDatabase.getInstance().getReference("Groups").child(groups_name).child("groupchat");
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,11 +134,11 @@ public class Group_Message extends AppCompatActivity
             }
         });
     }
+
     private void SendMessageInGroup() {
         String message=txt_send.getText().toString();
         String MessageKey=GroupRef.push().getKey();
 
-        GroupRef= FirebaseDatabase.getInstance().getReference("Groups").child(groups_name).child("groupchat");
 
         if(TextUtils.isEmpty(message)){
             txt_send.setError("type a message...");
@@ -154,6 +156,42 @@ public class Group_Message extends AppCompatActivity
             GroupMessageRef.updateChildren(messageInfo);
         }
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        GroupRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    if(snapshot.exists()){
+                        DisplayMessage(snapshot);
+                    }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.exists()){
+                    DisplayMessage(snapshot);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     // Group Profile Picture change
     private void openImage()
     {
@@ -228,6 +266,15 @@ public class Group_Message extends AppCompatActivity
             {
                 uploadImage();
             }
+        }
+    }
+    private void DisplayMessage(DataSnapshot snapshot)
+    {
+        Iterator iterator=snapshot.getChildren().iterator();
+        while (iterator.hasNext()){
+            String message=(String) ((DataSnapshot)iterator.next()).getValue();
+            String SenderName=(String) ((DataSnapshot)iterator.next()).getValue();
+            messages.append("\n"+SenderName+":-"+message+"\n");
         }
     }
 }

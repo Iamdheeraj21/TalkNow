@@ -4,17 +4,13 @@ public class Group
 {
     private String groupname;
     private String description;
-    private String createdby;
     private String groupimage;
-    private String search;
 
 
-    public Group(String groupname, String description, String createdby, String groupimage,String search) {
+    public Group(String groupname, String description, String groupimage) {
         this.groupname = groupname;
         this.description = description;
-        this.createdby = createdby;
         this.groupimage = groupimage;
-        this.search=search;
     }
 
     public Group(){

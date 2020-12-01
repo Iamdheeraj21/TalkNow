@@ -93,7 +93,6 @@ public class Login extends AppCompatActivity
                                     Intent intent=new Intent(Login.this,MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
-                                    finish();
                                 }else {
                                     Toast.makeText(Login.this,"Please verify emailAddress",Toast.LENGTH_SHORT).show();
                                 }
