@@ -1,17 +1,13 @@
 package www.dheerajprajapati.blogspot.start_activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -125,39 +121,6 @@ public class User_Profile extends AppCompatActivity {
                 about_button.setVisibility(View.GONE);
             }
         });
-        /*Change the username*/
-        username.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v){
-                AlertDialog.Builder builder=new AlertDialog.Builder(User_Profile.this).setTitle("Enter new username");
-                final EditText input=new EditText(User_Profile.this);
-                RelativeLayout.LayoutParams relativeLayout=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-                input.setLayoutParams(relativeLayout);
-                builder.setView(input);
-                builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String user_name=input.getText().toString();
-                        if(TextUtils.isEmpty(user_name)){
-                            Toast.makeText(User_Profile.this,"Please enter new username!",Toast.LENGTH_SHORT).show();
-                        }else{
-                            databaseReference.child("username").setValue(user_name).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(User_Profile.this,"Username update successfully...",Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(User_Profile.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }
-                }).setNegativeButton("Cancel",null).show();
-            }
-        });
         registerForContextMenu(about);
     }
     @Override
@@ -203,7 +166,7 @@ public class User_Profile extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),Settings.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
         }else if(item.getItemId()==R.id.AboutUs){
-            startActivity(new Intent(getApplicationContext(), AboutUs.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            startActivity(new Intent(getApplicationContext(), AppInfo.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
         }
         return false;

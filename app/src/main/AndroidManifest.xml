@@ -30,7 +30,7 @@
             android:name=".User_Profile"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AboutUs"
+            android:name=".AppInfo"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Settings"

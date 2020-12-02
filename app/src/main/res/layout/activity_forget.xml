@@ -5,7 +5,7 @@
     android:id="@+id/Forget_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2962FF"
+    android:background="@color/colorPrimary"
     tools:context=".Forget">
 
     <include

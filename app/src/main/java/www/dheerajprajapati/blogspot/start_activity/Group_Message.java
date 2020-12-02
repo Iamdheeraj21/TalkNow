@@ -10,7 +10,6 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -129,16 +128,30 @@ public class Group_Message extends AppCompatActivity
             txt_send.setError("type a message...");
         }
         else {
-            HashMap<String, Object> groupmessageKey = new HashMap<>();
-            GroupRef.updateChildren(groupmessageKey);
+            assert firebaseUser != null;
+            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot)
+                {
+                        User user=snapshot.getValue(User.class);
+                        assert user != null;
+                        String username=user.getUsername();
+                        HashMap<String, Object> groupmessageKey = new HashMap<>();
+                        GroupRef.updateChildren(groupmessageKey);
+                        GroupMessageRef=GroupRef.child(MessageKey);
+                        HashMap<String,Object> messageInfo=new HashMap<>();
+                        messageInfo.put("username",username);
+                        messageInfo.put("message",message);
 
-            GroupMessageRef=GroupRef.child(MessageKey);
+                        GroupMessageRef.updateChildren(messageInfo);
+                    }
 
-            HashMap<String,Object> messageInfo=new HashMap<>();
-            messageInfo.put("username",firebaseUser.getUid());
-            messageInfo.put("message",message);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            GroupMessageRef.updateChildren(messageInfo);
+                }
+            });
         }
     }
     @Override
