@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -102,7 +104,6 @@ public class Group_Message extends AppCompatActivity
                     Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-        UserInfo();
         group_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,28 +119,12 @@ public class Group_Message extends AppCompatActivity
             }
         });
     }
-    private void UserInfo()
-    {
-        UserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                   Current_User= dataSnapshot.getValue(User.class).getUsername();
-               }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     private void SendMessageInGroup() {
         String message=txt_send.getText().toString();
         String MessageKey=GroupRef.push().getKey();
-
-
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         if(TextUtils.isEmpty(message)){
             txt_send.setError("type a message...");
         }
@@ -150,7 +135,7 @@ public class Group_Message extends AppCompatActivity
             GroupMessageRef=GroupRef.child(MessageKey);
 
             HashMap<String,Object> messageInfo=new HashMap<>();
-            messageInfo.put("username",Current_User);
+            messageInfo.put("username",firebaseUser.getUid());
             messageInfo.put("message",message);
 
             GroupMessageRef.updateChildren(messageInfo);

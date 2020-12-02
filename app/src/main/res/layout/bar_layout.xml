@@ -5,6 +5,4 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tool_bar"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-    app:popupTheme="@style/MenuStyle">
-
-</androidx.appcompat.widget.Toolbar>
+    app:popupTheme="@style/MenuStyle"/>

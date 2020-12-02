@@ -33,4 +33,93 @@
                 tools:ignore="HardcodedText" />
         </androidx.appcompat.widget.Toolbar>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/setting_page"
+        android:id="@+id/setting_item">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Delete your account?"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText"
+            android:layout_marginTop="20dp"
+            android:id="@+id/delete_txt"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/delete_txt"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Delete Your account"
+            tools:ignore="HardcodedText,RtlHardcoded"
+            android:id="@+id/delete_button"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/delete_button"
+            android:layout_marginTop="10dp"
+            android:text="Change Your password"
+            android:id="@+id/change_password"
+            tools:ignore="HardcodedText"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/old_password"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:inputType="text"
+            android:hint="old password"
+            android:layout_below="@id/change_password"
+            tools:ignore="HardcodedText"
+            android:importantForAutofill="no"
+            android:visibility="gone"/>
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/new_password"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            android:hint="New Password"
+            android:layout_below="@id/old_password"
+            tools:ignore="HardcodedText,RtlHardcoded"
+            android:importantForAutofill="no"
+            android:visibility="gone"/>
+        <EditText
+            android:layout_width="300dp"
+            android:inputType="text"
+            android:layout_height="50dp"
+            android:id="@+id/confirm_password"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_below="@id/new_password"
+            android:hint="Confirm new Password"
+            tools:ignore="HardcodedText,RtlHardcoded,TextFields"
+            android:importantForAutofill="no"
+            android:visibility="gone"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_password"
+            android:id="@+id/update"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="150dp"
+            android:text="Update"
+            tools:ignore="HardcodedText"
+            android:visibility="gone"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Password"
+            android:id="@+id/change_btn"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/change_password"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
 </RelativeLayout>
