@@ -62,14 +62,14 @@
         android:layout_height="wrap_content">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/txt_send"
             android:layout_toLeftOf="@id/btn_send"
             android:background="@android:color/transparent"
             android:hint="Type a message....."
             android:layout_centerVertical="true"
             tools:ignore="HardcodedText,RtlHardcoded"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:importantForAutofill="no"
             android:inputType="text" />
         <ImageButton

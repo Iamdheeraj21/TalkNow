@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Start_Activity"
         tools:ignore="AllowBackup">
+        <activity android:name=".Start"/>
         <activity
             android:name=".Group_Message"
             android:parentActivityName=".MainActivity" />
@@ -48,7 +49,7 @@
         <activity
             android:name=".Register"
             android:parentActivityName=".Start" />
-        <activity android:name=".Start">
+        <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

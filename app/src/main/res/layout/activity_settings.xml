@@ -98,7 +98,7 @@
             android:id="@+id/confirm_password"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"
-            android:layout_below="@id/new_password"
+            android:layout_below="@id/delete_txt"
             android:hint="Confirm new Password"
             tools:ignore="HardcodedText,RtlHardcoded,TextFields"
             android:importantForAutofill="no"
