@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:276271606464:android:af2ac716330795ee711b25",
+        "mobilesdk_app_id": "1:276271606464:android:f5ff9893c3d8cccf711b25",
         "android_client_info": {
           "package_name": "www.dheerajprajapati.blogspot.start_activity"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "276271606464-hmdj4osr22e4ejka0fjlp8l9620cp7ar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.application",
+            "certificate_hash": "6338136e726bb638f80cb6edf30d0b21c302f3c0"
+          }
+        },
         {
           "client_id": "276271606464-7do4f0f1mrdt1t214nen7paoho569uhd.apps.googleusercontent.com",
           "client_type": 3

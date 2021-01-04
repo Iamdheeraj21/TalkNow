@@ -92,9 +92,7 @@ public class Register extends AppCompatActivity
                                         if(task.isSuccessful())
                                         {
                                             Intent intent=new Intent(Register.this,Login.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
-                                            finish();
                                         }else{
                                             Toast.makeText(Register.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                         }
@@ -105,7 +103,7 @@ public class Register extends AppCompatActivity
                     });
                 }else
                 {
-                    Toast.makeText(Register.this,"Please Check your email and password!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
         });

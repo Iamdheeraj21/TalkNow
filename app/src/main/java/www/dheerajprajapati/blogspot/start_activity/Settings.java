@@ -83,7 +83,7 @@ public class Settings extends AppCompatActivity {
                     oldPswd.setText("");
                     newPswd.setText("");
                     newConfirmPswd.setText("");
-                } else if (newpw.length() < 8 && newconfirm.length() < 8) {
+                } else if (newpw.length() < 8) {
                     newPswd.setError("Password at least 8 digits ");
                     newConfirmPswd.setError("");
                 } else {
